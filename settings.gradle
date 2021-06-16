@@ -1,0 +1,5 @@
+rootProject.name = "MarleySpoonsCodingChallenge"
+include ':app'
+include ':domain'
+include ':data'
+include ':presentation'
