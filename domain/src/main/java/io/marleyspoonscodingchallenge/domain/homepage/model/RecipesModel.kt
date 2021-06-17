@@ -5,31 +5,10 @@ data class RecipesModel(
 )
 
 data class RecipeItem(
+  val id: String?,
   val title: String?,
-  val photoUrl: String?
+  val photoUrl: String?,
+  val tags: List<String>?,
+  val description: String?,
+  val chefName: String?
 )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
