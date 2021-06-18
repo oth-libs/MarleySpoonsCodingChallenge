@@ -27,9 +27,14 @@ android {
   }
 
   buildTypes {
+    debug {
+      buildConfigField "String", "BASE_URL", '"https://cdn.contentful.com/"'
+    }
     release {
       minifyEnabled false
       proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+      buildConfigField "String", "BASE_URL", '"https://cdn.contentful.com/"'
     }
   }
   compileOptions {
@@ -65,12 +70,8 @@ dependencies {
   implementation"com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
   implementation"org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1"
 
-
-  implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  implementation 'androidx.core:core-ktx:1.5.0'
-  implementation 'androidx.appcompat:appcompat:1.3.0'
-  implementation 'com.google.android.material:material:1.3.0'
-  testImplementation 'junit:junit:4.+'
-  androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-  androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+  // test
+  testImplementation "junit:junit:$junit_version"
+  testImplementation "io.mockk:mockk:$mockk_version"
+  testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlin_test_version"
 }

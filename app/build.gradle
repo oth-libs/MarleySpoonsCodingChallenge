@@ -50,11 +50,7 @@ dependencies {
   implementation "androidx.navigation:navigation-ui:$nav_version"
 
   // koin
-  implementation "org.koin:koin-core:$koin_version"
-  implementation "org.koin:koin-core-ext:$koin_version"
-  implementation "org.koin:koin-android:$koin_version"
   implementation "org.koin:koin-androidx-viewmodel:$koin_version"
-  implementation "org.koin:koin-androidx-scope:$koin_version"
 
   // load image
   implementation 'com.squareup.picasso:picasso:2.71828'

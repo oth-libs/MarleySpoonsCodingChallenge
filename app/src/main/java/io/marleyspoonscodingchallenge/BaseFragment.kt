@@ -22,8 +22,8 @@ abstract class BaseFragment<BINDING : ViewDataBinding, VIEW_MODEL : BaseViewMode
 
   protected lateinit var binding: BINDING
 
-  private val parameterType: String? by lazy { arguments?.getString(parameterName) }
-  val viewModel: VIEW_MODEL by lazy { getViewModel(clazz = viewModelClass()) { parametersOf(parameterType) } }
+  private val argument: String? by lazy { arguments?.getString(parameterName) }
+  val viewModel: VIEW_MODEL by lazy { getViewModel(clazz = viewModelClass()) { parametersOf(argument) } }
 
   override fun onCreateView(
     inflater: LayoutInflater,

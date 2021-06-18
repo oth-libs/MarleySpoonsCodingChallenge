@@ -10,7 +10,7 @@ import io.marleyspoonscodingchallenge.domain.model.RecipeItem
 import io.marleyspoonscodingchallenge.domain.repository.GetRecipeRepository
 import kotlinx.coroutines.flow.Flow
 
-internal class GetRecipeRepositoryImpl(
+internal class GetRecipeRepositoryImp(
   private val recipesDao: RecipesDao,
   private val mapperRecipeRoomItemToModel: Mapper<RecipeRoomItem, RecipeItem>,
 ) : GetRecipeRepository {

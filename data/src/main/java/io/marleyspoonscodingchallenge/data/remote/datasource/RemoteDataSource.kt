@@ -1,6 +1,5 @@
 package io.marleyspoonscodingchallenge.data.remote.datasource
 
-import io.marleyspoonscodingchallenge.data.room.datasource.NetworkUtils
 import io.marleyspoonscodingchallenge.domain.datasource.DataSourceResultHolder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -11,7 +10,7 @@ internal object RemoteDataSource {
   /**
    * Get single RETROFIT response
    */
-  suspend fun <MODEL_API, MODEL> getResult(
+  suspend fun <MODEL_API, MODEL> getRemoteResult(
     call: suspend () -> Response<MODEL_API>,
     transform: suspend (MODEL_API) -> MODEL,
   ): DataSourceResultHolder<MODEL> {

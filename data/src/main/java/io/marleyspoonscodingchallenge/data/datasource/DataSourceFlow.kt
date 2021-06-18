@@ -1,19 +1,17 @@
 package io.marleyspoonscodingchallenge.data.datasource
 
 import io.marleyspoonscodingchallenge.domain.datasource.DataSourceResultHolder
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.withContext
 
 /**
  *
- * [MODEL] - The model of the api result
- *
+ * [selectQuery] - Executes a select to be sent as cache data
  * [networkCall] - Calls the network and implicitly checks for internet connection and returns the result wrapped in a [DataSourceResultHolder]
+ * [insertResultQuery] - Saves the network response as new cache data
  *
  * Function notify UI about:
  * [DataSourceResultHolder.Status.SUCCESS] - with data from database
@@ -35,7 +33,7 @@ fun <MODEL> resultFlow(
 
     // get remote result, will also hold success status
     networkCall?.let {
-      // send first cache if there is a network call
+      // send first if there is a network call
       emit(selectResponse.first())
 
       // call network

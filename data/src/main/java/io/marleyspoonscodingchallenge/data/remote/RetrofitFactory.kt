@@ -1,6 +1,7 @@
 package io.marleyspoonscodingchallenge.data.remote
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import io.marleyspoonscodingchallenge.data.BuildConfig
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
@@ -15,7 +16,7 @@ class RetrofitFactory {
     return Retrofit.Builder()
       .addConverterFactory(Json { ignoreUnknownKeys = true }.asConverterFactory("application/json".toMediaType()))
       .client(getClient())
-      .baseUrl("https://cdn.contentful.com/")//TODO
+      .baseUrl(BuildConfig.BASE_URL)
       .build()
   }
 

@@ -3,8 +3,8 @@ package io.marleyspoonscodingchallenge.data.di
 import io.marleyspoonscodingchallenge.data.remote.RetrofitFactory
 import io.marleyspoonscodingchallenge.data.remote.api.GetAllRecipesService
 import io.marleyspoonscodingchallenge.data.remote.mapper.MapperRecipesRetrofitDataToModel
-import io.marleyspoonscodingchallenge.data.repository.GetAllRecipesRepositoryImpl
-import io.marleyspoonscodingchallenge.data.repository.GetRecipeRepositoryImpl
+import io.marleyspoonscodingchallenge.data.repository.GetAllRecipesRepositoryImp
+import io.marleyspoonscodingchallenge.data.repository.GetRecipeRepositoryImp
 import io.marleyspoonscodingchallenge.data.room.RoomDB
 import io.marleyspoonscodingchallenge.data.room.mapper.MapperRecipeRoomItemToModel
 import io.marleyspoonscodingchallenge.data.room.mapper.MapperRecipesModelToRoomData
@@ -30,7 +30,7 @@ object DataModule {
 
       // repository
       single<GetAllRecipesRepository> {
-        GetAllRecipesRepositoryImpl(
+        GetAllRecipesRepositoryImp(
           getAllRecipesService = get(),
           mapperRecipesRetrofitDataToModel = MapperRecipesRetrofitDataToModel(),
 
@@ -41,7 +41,7 @@ object DataModule {
       }
 
       single<GetRecipeRepository> {
-        GetRecipeRepositoryImpl(
+        GetRecipeRepositoryImp(
           recipesDao = get(),
           mapperRecipeRoomItemToModel = MapperRecipeRoomItemToModel(),
         )
