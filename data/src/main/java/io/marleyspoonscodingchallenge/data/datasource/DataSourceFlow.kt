@@ -22,8 +22,8 @@ import kotlinx.coroutines.withContext
  */
 fun <MODEL> resultFlow(
   selectQuery: suspend () -> Flow<MODEL>,
-  networkCall: suspend () -> DataSourceResultHolder<MODEL>,
-  insertResultQuery: suspend (MODEL) -> Unit
+  networkCall: (suspend () -> DataSourceResultHolder<MODEL>)? = null,
+  insertResultQuery: (suspend (MODEL) -> Unit)? = null
 ): Flow<DataSourceResultHolder<MODEL>> {
   return flow {
 
@@ -31,32 +31,31 @@ fun <MODEL> resultFlow(
     emit(DataSourceResultHolder.inProgress())
 
     // get cache
-    val selectResponseFirst = selectQuery().map { DataSourceResultHolder.success(it) }.first()
-    emit(selectResponseFirst)
+    var selectResponse = selectQuery().map { DataSourceResultHolder.success(it) }
 
     // get remote result, will also hold success status
-    val responseStatus = networkCall()
+    networkCall?.let {
+      // send first cache if there is a network call
+      emit(selectResponse.first())
 
-    if (responseStatus.status == DataSourceResultHolder.Status.SUCCESS) {
-      insertResultQuery(responseStatus.data!!)
+      // call network
+      val responseStatus = networkCall()
 
-      // submit new local and listen for any future changes
-      val selectResponseFirstAll = selectQuery().map { DataSourceResultHolder.success(it) }
-      emitAll(selectResponseFirstAll)
-    } else {
-      // let viewmodel handle errors
-      emit(responseStatus)
+      if (responseStatus.status == DataSourceResultHolder.Status.SUCCESS) {
+
+        // save data to room if successful
+        insertResultQuery?.let { insertResultQuery(responseStatus.data!!) }
+
+        // submit new local and listen for any future changes
+        selectResponse = selectQuery().map { DataSourceResultHolder.success(it) }
+        emitAll(selectResponse)
+      } else {
+        // let viewmodel handle errors
+        emit(responseStatus)
+      }
+    } ?: run {
+      // if there is no network call, submit local and listen for any future changes
+      emitAll(selectResponse)
     }
   }
 }
-
-fun <MODEL> resultFlow(
-  selectQuery: () -> Flow<MODEL>
-): Flow<DataSourceResultHolder<MODEL>> {
-  return flow {
-    val a = withContext(Dispatchers.IO) { selectQuery() }
-
-    emitAll(a.map { DataSourceResultHolder.success(it) })
-  }
-}
-
