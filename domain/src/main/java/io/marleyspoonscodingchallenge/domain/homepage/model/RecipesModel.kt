@@ -5,7 +5,7 @@ data class RecipesModel(
 )
 
 data class RecipeItem(
-  val id: String?,
+  val id: String,
   val title: String?,
   val photoUrl: String?,
   val tags: List<String>?,

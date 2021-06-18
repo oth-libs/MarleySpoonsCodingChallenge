@@ -1,21 +1,21 @@
-package io.marleyspoonscodingchallenge.data.homepage.mapper
+package io.marleyspoonscodingchallenge.data.remote.mapper
 
-import io.marleyspoonscodingchallenge.data.homepage.model.Asset
-import io.marleyspoonscodingchallenge.data.homepage.model.Chef
-import io.marleyspoonscodingchallenge.data.homepage.model.Entry
-import io.marleyspoonscodingchallenge.data.homepage.model.Photo
-import io.marleyspoonscodingchallenge.data.homepage.model.RecipesData
-import io.marleyspoonscodingchallenge.data.homepage.model.Tag
 import io.marleyspoonscodingchallenge.data.mapper.Mapper
+import io.marleyspoonscodingchallenge.data.remote.model.Asset
+import io.marleyspoonscodingchallenge.data.remote.model.Chef
+import io.marleyspoonscodingchallenge.data.remote.model.Entry
+import io.marleyspoonscodingchallenge.data.remote.model.Photo
+import io.marleyspoonscodingchallenge.data.remote.model.RecipesRetrofitData
+import io.marleyspoonscodingchallenge.data.remote.model.Tag
 import io.marleyspoonscodingchallenge.domain.homepage.model.RecipeItem
 import io.marleyspoonscodingchallenge.domain.homepage.model.RecipesModel
 
 /**
- * Map [RecipesData] from retrofit to the model [RecipesModel]
+ * Map [RecipesRetrofitData] from retrofit to the model [RecipesModel]
  */
-internal class MapperRecipesDataToModel : Mapper<RecipesData, RecipesModel> {
+internal class MapperRecipesRetrofitDataToModel : Mapper<RecipesRetrofitData, RecipesModel> {
 
-  override fun map(from: RecipesData): RecipesModel {
+  override fun map(from: RecipesRetrofitData): RecipesModel {
     return from.run {
       RecipesModel(
         recipes = mapRecipes(from),
@@ -23,7 +23,7 @@ internal class MapperRecipesDataToModel : Mapper<RecipesData, RecipesModel> {
     }
   }
 
-  private fun mapRecipes(recipesData: RecipesData?): List<RecipeItem> {
+  private fun mapRecipes(recipesData: RecipesRetrofitData?): List<RecipeItem> {
     return mutableListOf<RecipeItem>().apply {
       recipesData?.run {
         items?.forEach { item ->

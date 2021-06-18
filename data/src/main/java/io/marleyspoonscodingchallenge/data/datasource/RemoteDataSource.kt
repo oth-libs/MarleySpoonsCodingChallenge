@@ -5,7 +5,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
 
-abstract class RemoteDataSource {
+internal class RemoteDataSource {
 
   /**
    * Get single RETROFIT response

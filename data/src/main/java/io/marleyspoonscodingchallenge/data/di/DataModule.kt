@@ -1,12 +1,14 @@
 package io.marleyspoonscodingchallenge.data.di
 
-import io.marleyspoonscodingchallenge.data.api.RetrofitFactory
-import io.marleyspoonscodingchallenge.data.homepage.api.GetAllRecipesService
-import io.marleyspoonscodingchallenge.data.homepage.mapper.MapperRecipesDataToModel
-import io.marleyspoonscodingchallenge.data.homepage.model.RecipesData
-import io.marleyspoonscodingchallenge.data.homepage.repository.GetAllRecipesRepositoryImpl
-import io.marleyspoonscodingchallenge.data.mapper.Mapper
-import io.marleyspoonscodingchallenge.domain.homepage.model.RecipesModel
+import io.marleyspoonscodingchallenge.data.datasource.RemoteDataSource
+import io.marleyspoonscodingchallenge.data.datasource.RoomDataSource
+import io.marleyspoonscodingchallenge.data.remote.RetrofitFactory
+import io.marleyspoonscodingchallenge.data.remote.api.GetAllRecipesService
+import io.marleyspoonscodingchallenge.data.remote.mapper.MapperRecipesRetrofitDataToModel
+import io.marleyspoonscodingchallenge.data.repository.GetAllRecipesRepositoryImpl
+import io.marleyspoonscodingchallenge.data.room.RoomDB
+import io.marleyspoonscodingchallenge.data.room.mapper.MapperRecipesModelToRoomData
+import io.marleyspoonscodingchallenge.data.room.mapper.MapperRecipesRoomDataToModel
 import io.marleyspoonscodingchallenge.domain.homepage.repository.GetAllRecipesRepository
 import kotlinx.serialization.ExperimentalSerializationApi
 import org.koin.core.context.loadKoinModules
@@ -21,11 +23,28 @@ object DataModule {
       single { RetrofitFactory().build() }
       single { (get() as Retrofit).create(GetAllRecipesService::class.java) }
 
-      //  mappers
-      single<Mapper<RecipesData, RecipesModel>> { MapperRecipesDataToModel() }
+      //Room
+      single { RoomDB.getInstance(get()) }
+      single { get<RoomDB>().recipesDao() }
+
+      // data source
+      single { RemoteDataSource() }
+      single { RoomDataSource() }
 
       // repository
-      single<GetAllRecipesRepository> { GetAllRecipesRepositoryImpl(getAllRecipesService = get(), mapper = get()) }
+      single<GetAllRecipesRepository> {
+        GetAllRecipesRepositoryImpl(
+          remoteDataSource = get(),
+          roomDataSource = get(),
+
+          getAllRecipesService = get(),
+          mapperRecipesRetrofitDataToModel = MapperRecipesRetrofitDataToModel(),
+
+          recipesDao = get(),
+          mapperRecipesRoomDataToModel = MapperRecipesRoomDataToModel(),
+          mapperRecipesModelToRoomData = MapperRecipesModelToRoomData()
+        )
+      }
     })
   }
 }

@@ -1,4 +1,4 @@
-package io.marleyspoonscodingchallenge.data.api
+package io.marleyspoonscodingchallenge.data.remote
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.ExperimentalSerializationApi

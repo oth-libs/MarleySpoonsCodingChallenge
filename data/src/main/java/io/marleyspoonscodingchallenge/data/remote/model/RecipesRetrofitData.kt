@@ -1,11 +1,11 @@
-package io.marleyspoonscodingchallenge.data.homepage.model
+package io.marleyspoonscodingchallenge.data.remote.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 // base content
 @Serializable
-data class RecipesData(
+data class RecipesRetrofitData(
   @SerialName("items") val items: List<Item>? = null,
   @SerialName("includes") val includes: Includes? = null
 )
