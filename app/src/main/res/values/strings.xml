@@ -4,4 +4,8 @@
   <string name="error_internet">Please check your internet connection</string>
   <string name="error_generic">An error occurred</string>
 
+  <string name="tags">Tags</string>
+  <string name="description">Description</string>
+  <string name="chef">Chef</string>
+
 </resources>

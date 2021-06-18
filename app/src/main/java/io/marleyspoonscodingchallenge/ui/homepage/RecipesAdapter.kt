@@ -1,13 +1,15 @@
-package io.marleyspoonscodingchallenge.homepage
+package io.marleyspoonscodingchallenge.ui.homepage
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import io.marleyspoonscodingchallenge.databinding.ItemViewRecipeBinding
-import io.marleyspoonscodingchallenge.domain.homepage.model.RecipeItem
+import io.marleyspoonscodingchallenge.domain.model.RecipeItem
 
 class RecipesAdapter(
-  private val data: List<RecipeItem>
+  private val data: List<RecipeItem>,
+  private val onClick: (RecipeItem) -> Unit
 ) : RecyclerView.Adapter<RecipesAdapter.ViewHolder>() {
 
   override fun onCreateViewHolder(parent: ViewGroup, position: Int): ViewHolder {
@@ -28,6 +30,7 @@ class RecipesAdapter(
     fun bind(recipeItem: RecipeItem) {
       binding.apply {
         this.recipeItem = recipeItem
+        this.onItemClick = View.OnClickListener { onClick(recipeItem) }
         executePendingBindings()
       }
     }

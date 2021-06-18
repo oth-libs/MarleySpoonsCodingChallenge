@@ -1,7 +1,7 @@
-package io.marleyspoonscodingchallenge.domain.homepage.repository
+package io.marleyspoonscodingchallenge.domain.repository
 
 import io.marleyspoonscodingchallenge.domain.datasource.DataSourceResultHolder
-import io.marleyspoonscodingchallenge.domain.homepage.model.RecipesModel
+import io.marleyspoonscodingchallenge.domain.model.RecipesModel
 import kotlinx.coroutines.flow.Flow
 
 interface GetAllRecipesRepository {

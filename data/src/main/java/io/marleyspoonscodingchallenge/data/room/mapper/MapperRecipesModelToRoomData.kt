@@ -3,8 +3,8 @@ package io.marleyspoonscodingchallenge.data.room.mapper
 import io.marleyspoonscodingchallenge.data.mapper.Mapper
 import io.marleyspoonscodingchallenge.data.room.model.RecipeRoomItem
 import io.marleyspoonscodingchallenge.data.room.model.RecipesRoomData
-import io.marleyspoonscodingchallenge.domain.homepage.model.RecipeItem
-import io.marleyspoonscodingchallenge.domain.homepage.model.RecipesModel
+import io.marleyspoonscodingchallenge.domain.model.RecipeItem
+import io.marleyspoonscodingchallenge.domain.model.RecipesModel
 
 /**
  * Map [RecipesModel] to the room model [RecipesRoomData]

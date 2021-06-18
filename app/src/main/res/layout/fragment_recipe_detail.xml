@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+  <data>
+
+    <variable
+        name="viewModel"
+        type="io.marleyspoonscodingchallenge.presentation.RecipeDetailViewModel" />
+  </data>
+
+  <ScrollView
+      android:id="@+id/svRecipeDetail"
+      android:layout_width="match_parent"
+      android:background="@color/color_screen_bg"
+      android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center"
+          android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/ivPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:foreground="@drawable/bg_photo"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:loadRemoteImage="@{viewModel.recipeItem.photoUrl}" />
+
+        <TextView
+            style="@style/style_16_medium"
+            android:layout_width="match_parent"
+            android:padding="@dimen/recipe_detail_padding"
+            android:text="@{viewModel.recipeItem.title}"
+            app:layout_constraintBottom_toBottomOf="@id/ivPhoto"
+            tools:text="title" />
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <TextView
+          style="@style/style_14_medium"
+          android:layout_width="match_parent"
+          android:padding="@dimen/recipe_detail_padding"
+          android:text="@string/tags"
+          android:textColor="@color/text_color_secondary"
+          app:layout_constraintBottom_toBottomOf="@id/ivPhoto"
+          app:visibleOrGone="@{viewModel.recipeItem.tagsString != null}" />
+
+      <TextView
+          style="@style/style_14_medium"
+          android:layout_width="match_parent"
+          android:padding="@dimen/recipe_detail_padding"
+          android:text="@{viewModel.recipeItem.tagsString}"
+          app:layout_constraintBottom_toBottomOf="@id/ivPhoto"
+          app:visibleOrGone="@{viewModel.recipeItem.tagsString != null}"
+          tools:text="title" />
+
+      <TextView
+          style="@style/style_14_medium"
+          android:layout_width="match_parent"
+          android:layout_marginTop="20dp"
+          android:padding="@dimen/recipe_detail_padding"
+          android:text="@string/description"
+          android:textColor="@color/text_color_secondary"
+          app:layout_constraintBottom_toBottomOf="@id/ivPhoto"
+          app:visibleOrGone="@{viewModel.recipeItem.description != null}" />
+
+      <TextView
+          style="@style/style_14_medium"
+          android:layout_width="match_parent"
+          android:padding="@dimen/recipe_detail_padding"
+          android:text="@{viewModel.recipeItem.description}"
+          app:layout_constraintBottom_toBottomOf="@id/ivPhoto"
+          app:visibleOrGone="@{viewModel.recipeItem.description != null}"
+          tools:text="title" />
+
+      <TextView
+          style="@style/style_14_medium"
+          android:layout_width="match_parent"
+          android:layout_marginTop="20dp"
+          android:padding="@dimen/recipe_detail_padding"
+          android:text="@string/chef"
+          android:textColor="@color/text_color_secondary"
+          app:layout_constraintBottom_toBottomOf="@id/ivPhoto"
+          app:visibleOrGone="@{viewModel.recipeItem.chefName != null}" />
+
+      <TextView
+          style="@style/style_14_medium"
+          android:layout_width="match_parent"
+          android:padding="@dimen/recipe_detail_padding"
+          android:text="@{viewModel.recipeItem.chefName}"
+          app:layout_constraintBottom_toBottomOf="@id/ivPhoto"
+          app:visibleOrGone="@{viewModel.recipeItem.chefName != null}"
+          tools:text="title" />
+    </LinearLayout>
+  </ScrollView>
+</layout>

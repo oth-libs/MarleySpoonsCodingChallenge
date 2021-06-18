@@ -7,10 +7,10 @@
 
     <variable
         name="viewModel"
-        type="io.marleyspoonscodingchallenge.presentation.homepage.HomePageViewModel" />
+        type="io.marleyspoonscodingchallenge.presentation.HomePageViewModel" />
   </data>
 
-  <androidx.coordinatorlayout.widget.CoordinatorLayout
+  <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:background="@color/color_screen_bg"
@@ -26,5 +26,5 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:listitem="@layout/item_view_recipe" />
 
-  </androidx.coordinatorlayout.widget.CoordinatorLayout>
+  </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

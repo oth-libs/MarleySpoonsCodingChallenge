@@ -7,8 +7,8 @@ import io.marleyspoonscodingchallenge.data.remote.model.Entry
 import io.marleyspoonscodingchallenge.data.remote.model.Photo
 import io.marleyspoonscodingchallenge.data.remote.model.RecipesRetrofitData
 import io.marleyspoonscodingchallenge.data.remote.model.Tag
-import io.marleyspoonscodingchallenge.domain.homepage.model.RecipeItem
-import io.marleyspoonscodingchallenge.domain.homepage.model.RecipesModel
+import io.marleyspoonscodingchallenge.domain.model.RecipeItem
+import io.marleyspoonscodingchallenge.domain.model.RecipesModel
 
 /**
  * Map [RecipesRetrofitData] from retrofit to the model [RecipesModel]

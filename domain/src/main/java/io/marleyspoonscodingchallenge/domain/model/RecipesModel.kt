@@ -1,4 +1,4 @@
-package io.marleyspoonscodingchallenge.domain.homepage.model
+package io.marleyspoonscodingchallenge.domain.model
 
 data class RecipesModel(
   val recipes: List<RecipeItem>?
@@ -11,4 +11,6 @@ data class RecipeItem(
   val tags: List<String>?,
   val description: String?,
   val chefName: String?
-)
+) {
+  fun getTagsString() = tags?.joinToString(", ")
+}

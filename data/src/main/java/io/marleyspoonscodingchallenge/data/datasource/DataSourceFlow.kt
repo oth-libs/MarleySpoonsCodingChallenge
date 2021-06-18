@@ -3,7 +3,7 @@ package io.marleyspoonscodingchallenge.data.datasource
 import io.marleyspoonscodingchallenge.domain.datasource.DataSourceResultHolder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
@@ -34,9 +34,8 @@ fun <MODEL> resultFlow(
 //      DataSourceResultHolder.success(it)
 //    }
 
-
-    val a  = withContext(Dispatchers.IO) { selectQuery() }
-    emit(DataSourceResultHolder.success(a))
+//    val a  = withContext(Dispatchers.IO) { selectQuery() }
+//    emit(DataSourceResultHolder.success(a))
 
     // 3- get remote result, will also hold success status
     val responseStatus = networkCall()
@@ -67,3 +66,14 @@ fun <MODEL> resultFlow(
 
   }
 }
+
+fun <MODEL> resultFlow(
+  selectQuery: () -> Flow<MODEL>
+): Flow<DataSourceResultHolder<MODEL>> {
+  return flow {
+    val a = withContext(Dispatchers.IO) { selectQuery() }
+
+    emitAll(a.map { DataSourceResultHolder.success(it) })
+  }
+}
+

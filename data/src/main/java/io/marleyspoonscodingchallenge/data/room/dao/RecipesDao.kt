@@ -6,6 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import io.marleyspoonscodingchallenge.data.room.TABLE_RECIPES
 import io.marleyspoonscodingchallenge.data.room.model.RecipeRoomItem
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 internal interface RecipesDao {
@@ -14,5 +15,8 @@ internal interface RecipesDao {
   suspend fun insert(recipes: List<RecipeRoomItem>)
 
   @Query("SELECT * FROM $TABLE_RECIPES")
-   fun selectAll(): List<RecipeRoomItem>
+  fun selectAll(): List<RecipeRoomItem>
+
+  @Query("SELECT * FROM $TABLE_RECIPES WHERE id = :recipeId")
+  fun selectWithId(recipeId: String): Flow<RecipeRoomItem>
 }

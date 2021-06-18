@@ -1,6 +1,7 @@
 package io.marleyspoonscodingchallenge
 
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,15 +11,19 @@ import androidx.fragment.app.Fragment
 import io.marleyspoonscodingchallenge.extensions.showToast
 import io.marleyspoonscodingchallenge.presentation.BaseViewModel
 import org.koin.androidx.viewmodel.ext.android.getViewModel
+import org.koin.core.parameter.parametersOf
 import java.lang.reflect.ParameterizedType
 import kotlin.reflect.KClass
 
 abstract class BaseFragment<BINDING : ViewDataBinding, VIEW_MODEL : BaseViewModel>(
-  private val layoutId: Int
+  private val layoutId: Int,
+  parameterName: String? = null
 ) : Fragment() {
 
   protected lateinit var binding: BINDING
-  val viewModel: VIEW_MODEL by lazy { getViewModel(clazz = viewModelClass()) }
+
+  private val parameterType: String? by lazy { arguments?.getString(parameterName) }
+  val viewModel: VIEW_MODEL by lazy { getViewModel(clazz = viewModelClass()) { parametersOf(parameterType) } }
 
   override fun onCreateView(
     inflater: LayoutInflater,

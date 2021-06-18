@@ -10,8 +10,8 @@ import io.marleyspoonscodingchallenge.data.room.dao.RecipesDao
 import io.marleyspoonscodingchallenge.data.room.model.RecipeRoomItem
 import io.marleyspoonscodingchallenge.data.room.model.RecipesRoomData
 import io.marleyspoonscodingchallenge.domain.datasource.DataSourceResultHolder
-import io.marleyspoonscodingchallenge.domain.homepage.model.RecipesModel
-import io.marleyspoonscodingchallenge.domain.homepage.repository.GetAllRecipesRepository
+import io.marleyspoonscodingchallenge.domain.model.RecipesModel
+import io.marleyspoonscodingchallenge.domain.repository.GetAllRecipesRepository
 import kotlinx.coroutines.flow.Flow
 
 internal class GetAllRecipesRepositoryImpl(

@@ -9,22 +9,10 @@ import io.marleyspoonscodingchallenge.domain.model.RecipesModel
 /**
  * Map [RecipesRoomData] from room to the model [RecipesModel]
  */
-internal class MapperRecipesRoomDataToModel : Mapper<List<RecipeRoomItem>, RecipesModel> {
-  override fun map(from: List<RecipeRoomItem>): RecipesModel {
+internal class MapperRecipeRoomItemToModel : Mapper<RecipeRoomItem, RecipeItem> {
+  override fun map(from: RecipeRoomItem): RecipeItem {
     return from.run {
-      RecipesModel(
-        recipes = mapRecipes(from),
-      )
-    }
-  }
-
-  private fun mapRecipes(recipesData: List<RecipeRoomItem>?): List<RecipeItem>? {
-    return recipesData?.run {
-      mutableListOf<RecipeItem>().apply {
-        recipesData.forEach { recipeItemData ->
-          add(mapRecipeItem(recipeItemData))
-        }
-      }
+      mapRecipeItem(this)
     }
   }
 

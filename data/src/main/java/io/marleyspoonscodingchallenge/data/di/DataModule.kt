@@ -6,10 +6,13 @@ import io.marleyspoonscodingchallenge.data.remote.RetrofitFactory
 import io.marleyspoonscodingchallenge.data.remote.api.GetAllRecipesService
 import io.marleyspoonscodingchallenge.data.remote.mapper.MapperRecipesRetrofitDataToModel
 import io.marleyspoonscodingchallenge.data.repository.GetAllRecipesRepositoryImpl
+import io.marleyspoonscodingchallenge.data.repository.GetRecipeRepositoryImpl
 import io.marleyspoonscodingchallenge.data.room.RoomDB
+import io.marleyspoonscodingchallenge.data.room.mapper.MapperRecipeRoomItemToModel
 import io.marleyspoonscodingchallenge.data.room.mapper.MapperRecipesModelToRoomData
 import io.marleyspoonscodingchallenge.data.room.mapper.MapperRecipesRoomDataToModel
-import io.marleyspoonscodingchallenge.domain.homepage.repository.GetAllRecipesRepository
+import io.marleyspoonscodingchallenge.domain.repository.GetAllRecipesRepository
+import io.marleyspoonscodingchallenge.domain.repository.GetRecipeRepository
 import kotlinx.serialization.ExperimentalSerializationApi
 import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
@@ -43,6 +46,15 @@ object DataModule {
           recipesDao = get(),
           mapperRecipesRoomDataToModel = MapperRecipesRoomDataToModel(),
           mapperRecipesModelToRoomData = MapperRecipesModelToRoomData()
+        )
+      }
+
+      single<GetRecipeRepository> {
+        GetRecipeRepositoryImpl(
+          roomDataSource = get(),
+
+          recipesDao = get(),
+          mapperRecipeRoomItemToModel = MapperRecipeRoomItemToModel(),
         )
       }
     })

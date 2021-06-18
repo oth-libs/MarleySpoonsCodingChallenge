@@ -1,12 +1,15 @@
-package io.marleyspoonscodingchallenge.homepage
+package io.marleyspoonscodingchallenge.ui.homepage
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import io.marleyspoonscodingchallenge.BaseFragment
 import io.marleyspoonscodingchallenge.R
 import io.marleyspoonscodingchallenge.databinding.FragmentHomepageBinding
+import io.marleyspoonscodingchallenge.domain.model.RecipeItem
+import io.marleyspoonscodingchallenge.extensions.navigate
 import io.marleyspoonscodingchallenge.extensions.setup
-import io.marleyspoonscodingchallenge.presentation.homepage.HomePageViewModel
+import io.marleyspoonscodingchallenge.presentation.HomePageViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 
@@ -16,7 +19,7 @@ class HomePageFragment : BaseFragment<FragmentHomepageBinding, HomePageViewModel
   layoutId = R.layout.fragment_homepage,
 ) {
 
-  private val recipesAdapter by lazy { RecipesAdapter(viewModel.recipesData) }
+  private val recipesAdapter by lazy { RecipesAdapter(viewModel.recipesData, ::onRecipeSelected) }
 
   override fun setupBinding() {
     binding.viewModel = viewModel
@@ -45,4 +48,7 @@ class HomePageFragment : BaseFragment<FragmentHomepageBinding, HomePageViewModel
     recipesAdapter.notifyDataSetChanged()
   }
 
+  private fun onRecipeSelected(recipeItem: RecipeItem) {
+    HomePageFragmentDirections.actionToRecipeDetail(recipeId = recipeItem.id).navigate(findNavController())
+  }
 }
