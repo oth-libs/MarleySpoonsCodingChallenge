@@ -15,7 +15,7 @@ internal interface RecipesDao {
   suspend fun insert(recipes: List<RecipeRoomItem>)
 
   @Query("SELECT * FROM $TABLE_RECIPES")
-  fun selectAll(): List<RecipeRoomItem>
+  fun selectAll(): Flow<List<RecipeRoomItem>>
 
   @Query("SELECT * FROM $TABLE_RECIPES WHERE id = :recipeId")
   fun selectWithId(recipeId: String): Flow<RecipeRoomItem>

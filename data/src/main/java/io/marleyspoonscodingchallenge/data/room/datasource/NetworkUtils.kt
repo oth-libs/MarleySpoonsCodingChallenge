@@ -1,4 +1,4 @@
-package io.marleyspoonscodingchallenge.data.datasource
+package io.marleyspoonscodingchallenge.data.room.datasource
 
 import java.net.InetSocketAddress
 import java.net.Socket

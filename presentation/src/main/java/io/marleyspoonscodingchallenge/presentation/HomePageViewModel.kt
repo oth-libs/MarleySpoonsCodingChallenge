@@ -56,12 +56,13 @@ class HomePageViewModel(
   /**
    * Start app with loading the recipes
    */
-  @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+  @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
   @Suppress("UNUSED") private fun loadRecipes() {
     viewModelScope.launch {
       getAllRecipesUseCase().collect { response ->
         println("aaaaaaaaaaa $response")
 
+        println("111")
         when (response.status) {
           DataSourceResultHolder.Status.ERROR -> {
             genericErrorLiveData.value = Unit
@@ -80,6 +81,9 @@ class HomePageViewModel(
 
           else -> Unit
         }
+
+        println("222")
+
       }
     }
   }

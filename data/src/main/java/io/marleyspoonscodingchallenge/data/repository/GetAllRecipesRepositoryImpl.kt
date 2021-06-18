@@ -1,7 +1,7 @@
 package io.marleyspoonscodingchallenge.data.repository
 
-import io.marleyspoonscodingchallenge.data.datasource.RemoteDataSource
-import io.marleyspoonscodingchallenge.data.datasource.RoomDataSource
+import io.marleyspoonscodingchallenge.data.remote.datasource.RemoteDataSource.getResult
+import io.marleyspoonscodingchallenge.data.room.datasource.RoomDataSource.getRoomResult
 import io.marleyspoonscodingchallenge.data.datasource.resultFlow
 import io.marleyspoonscodingchallenge.data.mapper.Mapper
 import io.marleyspoonscodingchallenge.data.remote.api.GetAllRecipesService
@@ -15,9 +15,6 @@ import io.marleyspoonscodingchallenge.domain.repository.GetAllRecipesRepository
 import kotlinx.coroutines.flow.Flow
 
 internal class GetAllRecipesRepositoryImpl(
-  private val remoteDataSource: RemoteDataSource,
-  private val roomDataSource: RoomDataSource,
-
   private val getAllRecipesService: GetAllRecipesService,
   private val mapperRecipesRetrofitDataToModel: Mapper<RecipesRetrofitData, RecipesModel>,
 
@@ -29,14 +26,14 @@ internal class GetAllRecipesRepositoryImpl(
   override fun getAllRecipes(): Flow<DataSourceResultHolder<RecipesModel>> {
     return resultFlow(
       selectQuery = {
-        roomDataSource.getRoomResult(
+        getRoomResult(
           call = { recipesDao.selectAll() },
           transform = { mapperRecipesRoomDataToModel.map(it) }
         )
       },
 
       networkCall = {
-        remoteDataSource.getResult(
+        getResult(
           call = { getAllRecipesService.getAllRecipes() },
           transform = { mapperRecipesRetrofitDataToModel.map(it) }
         )

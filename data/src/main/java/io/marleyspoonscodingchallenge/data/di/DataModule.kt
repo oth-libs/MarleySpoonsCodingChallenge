@@ -1,7 +1,5 @@
 package io.marleyspoonscodingchallenge.data.di
 
-import io.marleyspoonscodingchallenge.data.datasource.RemoteDataSource
-import io.marleyspoonscodingchallenge.data.datasource.RoomDataSource
 import io.marleyspoonscodingchallenge.data.remote.RetrofitFactory
 import io.marleyspoonscodingchallenge.data.remote.api.GetAllRecipesService
 import io.marleyspoonscodingchallenge.data.remote.mapper.MapperRecipesRetrofitDataToModel
@@ -30,16 +28,9 @@ object DataModule {
       single { RoomDB.getInstance(get()) }
       single { get<RoomDB>().recipesDao() }
 
-      // data source
-      single { RemoteDataSource() }
-      single { RoomDataSource() }
-
       // repository
       single<GetAllRecipesRepository> {
         GetAllRecipesRepositoryImpl(
-          remoteDataSource = get(),
-          roomDataSource = get(),
-
           getAllRecipesService = get(),
           mapperRecipesRetrofitDataToModel = MapperRecipesRetrofitDataToModel(),
 
@@ -51,8 +42,6 @@ object DataModule {
 
       single<GetRecipeRepository> {
         GetRecipeRepositoryImpl(
-          roomDataSource = get(),
-
           recipesDao = get(),
           mapperRecipeRoomItemToModel = MapperRecipeRoomItemToModel(),
         )

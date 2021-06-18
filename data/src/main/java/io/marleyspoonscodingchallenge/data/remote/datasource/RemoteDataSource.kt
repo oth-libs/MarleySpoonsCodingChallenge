@@ -1,11 +1,12 @@
-package io.marleyspoonscodingchallenge.data.datasource
+package io.marleyspoonscodingchallenge.data.remote.datasource
 
+import io.marleyspoonscodingchallenge.data.room.datasource.NetworkUtils
 import io.marleyspoonscodingchallenge.domain.datasource.DataSourceResultHolder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
 
-internal class RemoteDataSource {
+internal object RemoteDataSource {
 
   /**
    * Get single RETROFIT response
