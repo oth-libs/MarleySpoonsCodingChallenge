@@ -22,7 +22,7 @@ jobs:
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
       - name: echo tag name
         run: echo ${GITHUB_REF/refs\/tags\//}
-      -name: notify other project
+      - name: notify other project
         run: |
           curl -X POST https://api.github.com/repos/oth-libs/Craftnote-challenge/dispatches \
           -H 'Accept: application/vnd.github.everest-preview+json' \
