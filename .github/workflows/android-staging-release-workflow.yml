@@ -26,5 +26,5 @@ jobs:
         run: |
           curl -X POST https://api.github.com/repos/oth-libs/Craftnote-challenge/dispatches \
           -H 'Accept: application/vnd.github.everest-preview+json' \
-          -u "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" \
+          -u ${{ secrets.ACCESS_TOKEN }} \
           --data '{"event_type": "run-automated-tests", "client_payload": { "apklink": "some link" }}'
