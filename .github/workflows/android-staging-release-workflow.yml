@@ -17,7 +17,7 @@ jobs:
         run: echo hellooo
 
       - name: run file
-        run: ./runs.sh
+        run: ./scripts/runs.sh
 
 #      - name: Setup Java
 #        uses: actions/setup-java@v1
