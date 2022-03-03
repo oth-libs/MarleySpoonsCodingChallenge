@@ -20,7 +20,8 @@ abstract class BaseFragment<BINDING : ViewDataBinding, VIEW_MODEL : BaseViewMode
   parameterName: String? = null
 ) : Fragment() {
 
-  protected lateinit var binding: BINDING
+  private var _binding: BINDING? = null
+  val binding get() = _binding!!
 
   private val argument: String? by lazy { arguments?.getString(parameterName) }
   val viewModel: VIEW_MODEL by lazy { getViewModel(clazz = viewModelClass()) { parametersOf(argument) } }
@@ -30,8 +31,8 @@ abstract class BaseFragment<BINDING : ViewDataBinding, VIEW_MODEL : BaseViewMode
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
-    binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
-    binding.lifecycleOwner = viewLifecycleOwner
+    _binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
+    _binding.lifecycleOwner = viewLifecycleOwner
 
     setupBinding()
 
@@ -55,6 +56,11 @@ abstract class BaseFragment<BINDING : ViewDataBinding, VIEW_MODEL : BaseViewMode
     subscribeToNoInternetLiveData()
     subscribeToGenericErrorLiveDataLiveData()
     subscribeToShowMessageLiveData()
+  }
+  
+  override fun onDestroyView() {
+    _binding=null
+    super.onDestroyView()
   }
 
   private fun subscribeToNoInternetLiveData() {
